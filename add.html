@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Savings</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Add Savings</h1>
+        <form id="savings-form">
+            <input type="number" id="amount" placeholder="Amount" required>
+            <select id="category">
+                <option value="money">Money (INR)</option>
+                <option value="stocks">Stocks (INR)</option>
+                <option value="crypto">Crypto (USDT)</option>
+            </select>
+            <input type="text" id="source" placeholder="Source" required>
+            <input type="date" id="date" required>
+            <button type="submit">Save</button>
+        </form>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
