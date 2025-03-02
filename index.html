@@ -3,37 +3,44 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Savings Dashboard</title>
+    <title>Savings Tracker</title>
     <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
-<body>
-    <div class="container">
+<body class="dark-mode">
+    <div id="app">
         <header>
-            <h1>Savings Tracker</h1>
-            <button id="theme-toggle">🌙</button>
+            <h1>💰 Savings Tracker</h1>
+            <button id="themeToggle">🌙</button>
         </header>
 
-        <div class="progress-container">
-            <p>Total Savings: ₹<span id="total-savings">0</span> / ₹45,000</p>
-            <div class="progress-bar">
-                <div id="progress-fill"></div>
+        <div class="balance-card">
+            <h2>Total Balance</h2>
+            <p id="totalBalance">₹0</p>
+            <div class="progress-container">
+                <div id="progress" class="progress-bar"></div>
             </div>
         </div>
 
-        <div class="stats">
-            <canvas id="asset-chart"></canvas>
+        <div class="asset-overview">
+            <h3>Assets Overview</h3>
+            <canvas id="assetChart"></canvas>
         </div>
 
-        <div id="laptop-image" class="hidden">
-            <img src="assets/lap.jpg" alt="Laptop">
+        <div class="actions">
+            <button id="addMoney">➕ Add Money</button>
+            <button id="viewHistory">📜 View History</button>
+            <button id="setTarget">🎯 Set Target</button>
         </div>
 
-        <div class="buttons">
-            <button onclick="window.location='add.html'">➕ Add Savings</button>
-            <button onclick="window.location='history.html'">📜 View History</button>
-            <button onclick="window.location='settings.html'">⚙ Settings</button>
+        <div id="history" class="history-container"></div>
+
+        <div id="laptopImage" class="hidden">
+            <img src="lap.jpg" alt="Laptop Unlocked">
+            <p>🎉 Congratulations! You've reached your goal.</p>
         </div>
     </div>
+
     <script src="script.js"></script>
 </body>
 </html>
