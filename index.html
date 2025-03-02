@@ -8,19 +8,31 @@
 </head>
 <body>
     <div class="container">
-        <h1>Savings Tracker</h1>
-        <button id="theme-toggle">Toggle Theme</button>
-        <p>Total Savings: ₹<span id="total-savings">0</span> / ₹45,000</p>
-        <div class="progress">
-            <div id="progress-bar"></div>
+        <header>
+            <h1>Savings Tracker</h1>
+            <button id="theme-toggle">🌙</button>
+        </header>
+
+        <div class="progress-container">
+            <p>Total Savings: ₹<span id="total-savings">0</span> / ₹45,000</p>
+            <div class="progress-bar">
+                <div id="progress-fill"></div>
+            </div>
         </div>
-        <canvas id="asset-chart"></canvas>
-        <div id="laptop-image" style="display: none;">
+
+        <div class="stats">
+            <canvas id="asset-chart"></canvas>
+        </div>
+
+        <div id="laptop-image" class="hidden">
             <img src="assets/lap.jpg" alt="Laptop">
         </div>
-        <button onclick="window.location='add.html'">Add Savings</button>
-        <button onclick="window.location='history.html'">View History</button>
-        <button onclick="window.location='settings.html'">Settings</button>
+
+        <div class="buttons">
+            <button onclick="window.location='add.html'">➕ Add Savings</button>
+            <button onclick="window.location='history.html'">📜 View History</button>
+            <button onclick="window.location='settings.html'">⚙ Settings</button>
+        </div>
     </div>
     <script src="script.js"></script>
 </body>
