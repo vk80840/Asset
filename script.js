@@ -1,42 +1,66 @@
 document.addEventListener("DOMContentLoaded", function () {
-    let savings = JSON.parse(localStorage.getItem("savings")) || [];
-    let totalTarget = localStorage.getItem("target") || 45000;
+    const totalBalance = document.getElementById("totalBalance");
+    const progress = document.getElementById("progress");
+    const themeToggle = document.getElementById("themeToggle");
+    const addMoneyBtn = document.getElementById("addMoney");
+    const viewHistoryBtn = document.getElementById("viewHistory");
+    const setTargetBtn = document.getElementById("setTarget");
+    const historyDiv = document.getElementById("history");
+    const laptopImage = document.getElementById("laptopImage");
 
-    function updateDashboard() {
-        let totalINR = 0;
-        savings.forEach(entry => {
-            totalINR += entry.category === "crypto" ? entry.amount * 91 : entry.amount;
-        });
+    let balance = localStorage.getItem("balance") ? parseInt(localStorage.getItem("balance")) : 0;
+    let target = localStorage.getItem("target") ? parseInt(localStorage.getItem("target")) : 45000;
+    let history = JSON.parse(localStorage.getItem("history")) || [];
 
-        document.getElementById("total-savings").innerText = totalINR;
-        let progress = (totalINR / totalTarget) * 100;
-        document.getElementById("progress-fill").style.width = progress + "%";
+    function updateUI() {
+        totalBalance.innerText = `₹${balance}`;
+        let percentage = (balance / target) * 100;
+        progress.style.width = percentage + "%";
 
-        if (progress >= 100) {
-            document.getElementById("laptop-image").classList.remove("hidden");
+        if (balance >= target) {
+            laptopImage.style.display = "block";
         }
     }
 
-    if (document.getElementById("savings-form")) {
-        document.getElementById("savings-form").addEventListener("submit", function (e) {
-            e.preventDefault();
-            let amount = parseFloat(document.getElementById("amount").value);
-            let category = document.getElementById("category").value;
-            let source = document.getElementById("source").value;
-            let date = document.getElementById("date").value;
-
-            savings.push({ amount, category, source, date });
-            localStorage.setItem("savings", JSON.stringify(savings));
-
-            window.location = "index.html";
-        });
+    function saveData() {
+        localStorage.setItem("balance", balance);
+        localStorage.setItem("history", JSON.stringify(history));
     }
 
-    if (document.getElementById("theme-toggle")) {
-        document.getElementById("theme-toggle").addEventListener("click", function () {
-            document.body.classList.toggle("dark-mode");
-        });
-    }
+    addMoneyBtn.addEventListener("click", function () {
+        let amount = parseInt(prompt("Enter amount:"));
+        let source = prompt("Enter source:");
+        let date = new Date().toLocaleDateString();
 
-    updateDashboard();
+        if (!isNaN(amount)) {
+            balance += amount;
+            history.push({ amount, source, date });
+            saveData();
+            updateUI();
+        }
+    });
+
+    viewHistoryBtn.addEventListener("click", function () {
+        historyDiv.innerHTML = "<h3>History</h3>";
+        history.forEach(entry => {
+            historyDiv.innerHTML += `<p>₹${entry.amount} - ${entry.source} (${entry.date})</p>`;
+        });
+    });
+
+    setTargetBtn.addEventListener("click", function () {
+        let newTarget = parseInt(prompt("Set new target:"));
+        if (!isNaN(newTarget) && newTarget > 0) {
+            target = newTarget;
+            localStorage.setItem("target", target);
+            updateUI();
+        }
+    });
+
+    themeToggle.addEventListener("click", function () {
+        document.body.classList.toggle("dark-mode");
+        document.body.classList.toggle("light-mode");
+        themeToggle.textContent = document.body.classList.contains("dark-mode") ? "🌞" : "🌙";
+    });
+
+    updateUI();
 });
