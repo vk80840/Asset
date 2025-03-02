@@ -1,0 +1,27 @@
+body {
+    font-family: Arial, sans-serif;
+    transition: 0.3s;
+}
+.container {
+    max-width: 400px;
+    margin: auto;
+    text-align: center;
+}
+button {
+    padding: 10px;
+    margin: 5px;
+}
+.progress {
+    width: 100%;
+    height: 20px;
+    background: #ddd;
+}
+#progress-bar {
+    height: 100%;
+    width: 0%;
+    background: green;
+}
+.dark-mode {
+    background: #121212;
+    color: white;
+}
